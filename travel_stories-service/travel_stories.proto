@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package travel_stories;
+
+service TravelStoriesService {
+    rpc CreateTravelStory(CreateTravelStoryRequest) returns (CreateTravelStoryResponse);
+    rpc UpdateTravelStory(UpdateTravelStoryRequest) returns (UpdateTravelStoryResponse);
+    rpc DeleteTravelStory(DeleteTravelStoryRequest) returns (DeleteTravelStoryResponse);
+    rpc ListTravelStory(ListTravelStoryRequest) returns (ListTravelStoryResponse);
+    rpc GetTravelStory(GetTravelStoryRequest) returns (GetTravelStoryResponse);
+    rpc ListComments(ListCommentsRequest) returns (ListCommentsResponse);
+    rpc AddLike(AddLikeRequest) returns (AddLikeResponse);
+}
+
+// CREATE TRAVEL STORY
+message CreateTravelStoryRequest {
+    string title = 1;
+    string content = 2;
+    string location = 3;
+    repeated string tags = 4;
+    repeated string images = 5;
+}
+
+message CreateTravelStoryResponse {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    string location = 4;
+    repeated string tags = 5;
+    string author_id = 6;
+    string created_at = 7;
+}
+
+// UPDATE TRAVEL STORY 
+message UpdateTravelStoryRequest {
+    string title = 1;
+    string content = 2;
+}
+
+message UpdateTravelStoryResponse {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    string location = 4;
+    repeated string tags = 5;
+    string author_id = 6;
+    string updated_at = 7;
+}
+
+// DELETE TRAVEL STORY
+message DeleteTravelStoryRequest {
+    string travel_story_id = 1;
+}
+
+message DeleteTravelStoryResponse {
+    string message = 1;
+}
+
+// LIST TRAVEL STORIES
+message ListTravelStoryRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    int32 offset = 3;
+}
+
+message ListTravelStoryResponse {
+    repeated TravelStory stories = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message TravelStory {
+    string id = 1;
+    string title = 2;
+    Authors author = 3;
+    string location = 4;
+    int32 likes_count = 5;
+    int32 comments_count = 6;
+    string created_at = 7; 
+}
+
+message Authors {
+    string id = 1;
+    string username = 2;
+}
+
+// GET TRAVEL STROU BY ID
+message  GetTravelStoryRequest {
+    string story_id = 1;
+}
+
+message GetTravelStoryResponse {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    string location = 4;
+    repeated string tags = 5;
+    Author author = 6;
+    int32 likes_count = 7;
+    int32 comments_count = 8;
+    string created_at = 9; 
+    string updated_at = 10;
+}
+
+message Author {
+    string id = 1;
+    string username = 2;
+    string full_name = 3;
+}
+
+// LIST COMMENTS
+message ListCommentsRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    int32 offset = 3;
+}
+
+message ListCommentsResponse {
+    repeated Comment comments = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message Comment {
+    string id = 1;
+    string content = 2;
+    Author author = 3;
+    string created_at = 4;
+}
+
+// ADD LIKES TO STORY
+message AddLikeRequest {
+    string story_id = 1;
+    string user_id = 2;
+}
+
+message AddLikeResponse {
+    string story_id = 1;
+    string user_id = 2;
+    string liked_at = 3;
+}

@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package user_communication;
+
+service MessageService {
+    rpc SendMessageUser(SendMessageRequest) returns (SendMessageResponse);
+    rpc ListMessage(ListMessageRequest) returns (ListMessageResponse);
+    rpc AddTravelTips(AddTravelTipsRequest) returns (AddTravelTipsResponse);
+    rpc GetTravelTips(GetTravelTipsRequest) returns (GetTravelTipsResponse);
+    rpc GetUserStatics(GetUserStaticsRequest) returns (GetUserStaticsResponse);
+}
+
+// SEND MESSAGE
+message SendMessageRequest {
+    string recipient_id = 1;
+    string content = 2;
+}
+
+message SendMessageResponse {
+    string id = 1;
+    string sender_id = 2;
+    string recipient_id = 3;
+    string content = 4;
+    string created_at = 5;
+}
+
+// LIST MESSAGE
+message ListMessageRequest {
+    int32 page = 1;
+    int32 limit = 2;
+}
+
+message ListMessageResponse {
+    Message message = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message Message {
+    string id = 1;
+    Sender sender = 2;
+    Recipient secipient = 3;
+    string content = 4;
+    string created_at = 5;
+}
+
+message Sender {
+    string id = 1;
+    string username = 2;
+}
+
+message Recipient {
+    string id = 1;
+    string username = 2;
+}
+
+// ADD TRAVEL TIPS 
+message AddTravelTipsRequest {
+    string title = 1;
+    string content = 2;
+    string category = 3;
+}
+
+message AddTravelTipsResponse {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    string category = 4;
+    string author_id = 5;
+    string created_at = 6;
+}
+
+// GET TRAVEL TIPS
+message GetTravelTipsRequest {
+    string catygory = 1;
+    int32 page = 2;
+    int32 limit = 3;
+}
+
+message GetTravelTipsResponse {
+    Tip tips = 1;
+    int32 total = 6;
+    int32 page = 7;
+    int32 limit = 8;
+}
+
+message Tip {
+    string id = 1;
+    string title = 2;
+    string category = 3;
+    Author author = 4;
+    string created = 5;
+}
+
+message Author {
+    string id = 1;
+    string username = 2;
+}
+
+// GET USER STATICS
+message GetUserStaticsRequest {
+    string user_id = 1;
+}
+
+message GetUserStaticsResponse {
+    string user_id = 1;
+    int32 total_stories = 2;
+    int32 total_itineraries = 3;
+    int32 total_countries_visited = 4;
+    int32 total_likes_received = 5;
+    int32 total_comments_received = 6;
+    MostPopularStory most_popular_story = 7;
+    MostPopularItinerary most_popular_itinerary = 8;
+}
+
+message MostPopularStory {
+    string id = 1;
+    string title = 2;
+    int32 likes_count = 3;
+}
+
+message MostPopularItinerary {
+    string id = 1;
+    string title = 2;
+    int32 likes_count = 4;
+}

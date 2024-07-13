@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package travel_destination;
+
+service TravelDestinationService {
+    rpc ListTravelDestnations(ListDetinationRequest) returns (ListDetinationResponse);
+    rpc GetTravelDestination(GetDestinationRequest) returns (GetDestinationResponse);
+    rpc GetTrendDestinations(GetDestinationRequest) returns (GetDestinationResponse);
+}
+
+
+// LIST TRAVEL DESTINATION
+message ListDetinationRequest {
+    string query = 1;
+    int32 page = 2;
+    int32 limit = 3;
+}
+
+message ListDetinationResponse {
+    repeated Destination destinations = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message Destination {
+    string id = 1;
+    string name = 2;
+    string country = 3;
+    string description = 4;
+    repeated string popular_activities = 5;
+}
+
+// GET TRAVEL DESTINATION 
+message GetDestinationRequest {
+    string id = 1;
+}
+
+message GetDestinationResponse {
+    string id = 1;
+    string name = 2;
+    string country = 3;
+    string description = 4;
+    repeated string popular_activities = 5;
+    string best_time_to_visit = 6;
+    string average_cost_per_day = 7;
+    string currency = 8;
+    string language = 9;
+    repeated string top_attractions = 10;
+}
+
+// GET TERENDING DESTINATIONS
+message GetTrendDestinationRequest {}
+
+message GetTrendDestinationResponse {
+    TrendDestination destinations = 1;
+    int32 total = 2;
+}
+
+message TrendDestination {
+    string id = 1;
+    string name = 2;
+    string country = 3;
+    string popularity_score = 4;
+    string trending_reason = 5;
+}

@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package itineraries_service;
+
+service ItinerariesService {
+    rpc CreateItinerary(CreateItineraryRequest) returns (CreateItineraryResponse);
+    rpc UpdateItinerary(UpdateItineraryRequest) returns (UpdateItineraryResponse);
+    rpc DeleteItinerary(DeleteItineraryRequest) returns (DeleteItineraryResponse);
+    rpc GetItinerary(GetItineraryRequest) returns (GetItineraryResponse);
+    rpc LeaveComment(LeaveCommentRequest) returns (LeaveCommentResponse);
+}
+
+// CREATE ITINERARIES
+message CreateItineraryRequest {
+    string title = 1;
+    string description = 2;
+    string start_date = 3;
+    string end_date = 4;
+    repeated Destination distinations = 5;
+}
+
+message CreateItineraryResponse {
+    string id = 1;
+    string title = 2;
+    string decsription = 3;
+    string start_date = 4;
+    string end_date = 5;
+    string author_id = 6;
+    string created_at = 7;
+}
+
+message Destination {
+    string name = 1;
+    string start_date = 2;
+    string end_date = 3;
+    repeated string activities = 4;
+}
+
+// UPDATE ITINERARIES
+message UpdateItineraryRequest {
+    string title = 1;
+    string description = 2;
+}
+
+message UpdateItineraryResponse {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    string start_date = 4;
+    string end_date = 5;
+    string author_id = 6;
+    string updated_at = 7;
+}
+
+// DELETE ITINERARIES
+message DeleteItineraryRequest {
+    string id = 1;
+}
+
+message DeleteItineraryResponse {
+    string message = 1;
+}
+
+// GET ITINERARIES
+message GetItineraryRequest {
+    string id = 1;
+}
+
+message GetItineraryResponse {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    string start_date = 4;
+    string end_date = 5;
+    Author author = 6;
+    Destination destinations = 7;
+    int32 likes_count = 8;
+    int32 comments_count = 9;
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+message Author {
+    string id = 1;
+    string username = 2;
+    string full_name = 3;
+}
+
+// COMMENT TO ITINERARY
+message LeaveCommentRequest {
+    string id = 1;
+    string content = 2;
+}
+
+message LeaveCommentResponse {
+    string id = 1;
+    string content = 2;
+    string athor_id = 3;
+    string itinerary_id = 4;
+    string created_at = 5;
+}
+
