@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "generated/itineraries";
+
 package itineraries_service;
 
 service ItinerariesService {
