@@ -8,6 +8,7 @@ service ItinerariesService {
     rpc CreateItinerary(CreateItineraryRequest) returns (CreateItineraryResponse);
     rpc UpdateItinerary(UpdateItineraryRequest) returns (UpdateItineraryResponse);
     rpc DeleteItinerary(DeleteItineraryRequest) returns (DeleteItineraryResponse);
+    rpc ListItineraries(ListItinerariesRequest) returns (ListItinerariesResponse); 
     rpc GetItinerary(GetItineraryRequest) returns (GetItineraryResponse);
     rpc LeaveComment(LeaveCommentRequest) returns (LeaveCommentResponse);
 }
@@ -18,13 +19,14 @@ message CreateItineraryRequest {
     string description = 2;
     string start_date = 3;
     string end_date = 4;
-    repeated Destination distinations = 5;
+    string athor_id = 5;
+    repeated Destination distinations = 6;
 }
 
 message CreateItineraryResponse {
     string id = 1;
     string title = 2;
-    string decsription = 3;
+    string description = 3;
     string start_date = 4;
     string end_date = 5;
     string author_id = 6;
@@ -40,8 +42,9 @@ message Destination {
 
 // UPDATE ITINERARIES
 message UpdateItineraryRequest {
-    string title = 1;
-    string description = 2;
+    string id = 1;
+    string title = 2;
+    string description = 3;
 }
 
 message UpdateItineraryResponse {
@@ -63,7 +66,35 @@ message DeleteItineraryResponse {
     string message = 1;
 }
 
-// GET ITINERARIES
+// LIST ITINERARIES
+message ListItinerariesRequest {
+    int32 page = 1;
+    int32 limit = 2;
+}
+message ListItinerariesResponse {
+    repeated Itinerary itineraries = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+message Itinerary {
+    string id = 1;
+    string title = 2;
+    Authors author = 3;
+    string start_date = 5;
+    string end_date = 6;
+    string likes_count = 7;
+    string comments_count = 8;
+    string created_at = 9;
+}
+
+message Authors {
+    string id = 1;
+    string username = 2;
+}
+
+// GET ITINERARY
 message GetItineraryRequest {
     string id = 1;
 }

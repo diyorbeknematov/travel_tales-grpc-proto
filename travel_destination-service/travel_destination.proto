@@ -7,7 +7,7 @@ package travel_destination;
 service TravelDestinationService {
     rpc ListTravelDestnations(ListDetinationRequest) returns (ListDetinationResponse);
     rpc GetTravelDestination(GetDestinationRequest) returns (GetDestinationResponse);
-    rpc GetTrendDestinations(GetDestinationRequest) returns (GetDestinationResponse);
+    rpc GetTrendDestinations(GetTrendDestinationRequest) returns (GetTrendDestinationResponse);
 }
 
 
@@ -55,7 +55,7 @@ message GetDestinationResponse {
 message GetTrendDestinationRequest {}
 
 message GetTrendDestinationResponse {
-    TrendDestination destinations = 1;
+    repeated TrendDestination destinations = 1;
     int32 total = 2;
 }
 

@@ -14,8 +14,9 @@ service MessageService {
 
 // SEND MESSAGE
 message SendMessageRequest {
-    string recipient_id = 1;
-    string content = 2;
+    string sende_id = 1;
+    string recipient_id = 2;
+    string content = 3;
 }
 
 message SendMessageResponse {
@@ -33,7 +34,7 @@ message ListMessageRequest {
 }
 
 message ListMessageResponse {
-    Message message = 1;
+    repeated Message message = 1;
     int32 total = 2;
     int32 page = 3;
     int32 limit = 4;
@@ -42,7 +43,7 @@ message ListMessageResponse {
 message Message {
     string id = 1;
     Sender sender = 2;
-    Recipient secipient = 3;
+    Recipient recipient = 3;
     string content = 4;
     string created_at = 5;
 }
@@ -62,6 +63,7 @@ message AddTravelTipsRequest {
     string title = 1;
     string content = 2;
     string category = 3;
+    string author_id = 4;
 }
 
 message AddTravelTipsResponse {
@@ -81,7 +83,7 @@ message GetTravelTipsRequest {
 }
 
 message GetTravelTipsResponse {
-    Tip tips = 1;
+    repeated Tip tips = 1;
     int32 total = 6;
     int32 page = 7;
     int32 limit = 8;
@@ -92,7 +94,7 @@ message Tip {
     string title = 2;
     string category = 3;
     Author author = 4;
-    string created = 5;
+    string created_at = 5;
 }
 
 message Author {

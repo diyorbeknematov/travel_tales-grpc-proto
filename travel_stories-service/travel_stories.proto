@@ -10,6 +10,7 @@ service TravelStoriesService {
     rpc DeleteTravelStory(DeleteTravelStoryRequest) returns (DeleteTravelStoryResponse);
     rpc ListTravelStory(ListTravelStoryRequest) returns (ListTravelStoryResponse);
     rpc GetTravelStory(GetTravelStoryRequest) returns (GetTravelStoryResponse);
+    rpc AddCommment(AddCommentRequest) returns (AddCommentResponse);
     rpc ListComments(ListCommentsRequest) returns (ListCommentsResponse);
     rpc AddLike(AddLikeRequest) returns (AddLikeResponse);
 }
@@ -21,6 +22,7 @@ message CreateTravelStoryRequest {
     string location = 3;
     repeated string tags = 4;
     repeated string images = 5;
+    string author_id = 6;
 }
 
 message CreateTravelStoryResponse {
@@ -35,8 +37,9 @@ message CreateTravelStoryResponse {
 
 // UPDATE TRAVEL STORY 
 message UpdateTravelStoryRequest {
-    string title = 1;
-    string content = 2;
+    string id = 1;
+    string title = 2;
+    string content = 3;
 }
 
 message UpdateTravelStoryResponse {
@@ -62,7 +65,6 @@ message DeleteTravelStoryResponse {
 message ListTravelStoryRequest {
     int32 page = 1;
     int32 limit = 2;
-    int32 offset = 3;
 }
 
 message ListTravelStoryResponse {
@@ -87,7 +89,7 @@ message Authors {
     string username = 2;
 }
 
-// GET TRAVEL STROU BY ID
+// GET TRAVEL STORY BY ID
 message  GetTravelStoryRequest {
     string story_id = 1;
 }
@@ -111,6 +113,21 @@ message Author {
     string full_name = 3;
 }
 
+// ADD COMMENTS
+message AddCommentRequest {
+    string story_id = 1;
+    string author_id = 2;
+    string content = 3;
+}
+
+message AddCommentResponse {
+    string id = 1;
+    string content = 2;
+    string author_id = 3;
+    string story_id = 4;
+    string created_at = 5;
+}
+
 // LIST COMMENTS
 message ListCommentsRequest {
     int32 page = 1;
@@ -128,7 +145,7 @@ message ListCommentsResponse {
 message Comment {
     string id = 1;
     string content = 2;
-    Author author = 3;
+    Authors author = 3;
     string created_at = 4;
 }
 
