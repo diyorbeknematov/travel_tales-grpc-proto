@@ -5,45 +5,13 @@ option go_package = "generated/user";
 package auth_service;
 
 service AuthService {
-    rpc Register(RegisterRequest) returns (RegisterResponse);
-    rpc Login(LoginRequest) returns (LoginResponse);
     rpc GetUserProfile(GetProfileRequest) returns (GetProfileResponse);
+    rpc UpdateUserProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
     rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
     rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
-    rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
-    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
-    rpc LogoutUser(LogoutRequest) returns (LogoutResponse);
     rpc GetUserActivity(GetProfileRequest) returns (GetUserActivityResponse);
     rpc FollowUser(FollowUserRequest) returns (FollowUserResponse);
     rpc ListFollowers(ListFollowersRequest) returns (FollowUserResponse);
-}
-
-// Register
-message RegisterRequest {
-    string username = 1;
-    string email = 2;
-    string password = 3;
-    string full_name = 4;
-}
-
-message RegisterResponse {
-    string id = 1;
-    string username = 2;
-    string email = 3;
-    string full_name = 4;
-    string created_at = 5;
-}
-
-// Login
-message LoginRequest {
-    string email = 1;
-    string password = 3;
-}
-
-message LoginResponse {
-    string access_token = 1;
-    string refresh_token = 2;
-    int64 expires_in = 3;
 }
 
 // GET USER PROFILE
@@ -64,9 +32,10 @@ message GetProfileResponse {
 
 // UPDATE USER PROFILE 
 message UpdateProfileRequest {
-    string full_name = 1;
-    string bio = 2;
-    int32 countries_visited = 3;
+    string id = 1;
+    string full_name = 2;
+    string bio = 3;
+    int32 countries_visited = 4;
 }
 
 message UpdateProfileResponse {
@@ -108,35 +77,6 @@ message DeleteUserResponse {
     string message = 1;
 }
 
-// RESET PASSWORD
-message ResetPasswordRequest {
-    string email = 1;
-}
-
-message ResetPasswordResponse {
-    string message = 1;
-}
-
-// Refresh Token
-message RefreshTokenRequest {
-    string refresh_token = 1;
-}
-
-message RefreshTokenResponse {
-    string access_token = 1;
-    string refresh_token = 2;
-    int64 expires_in = 3;
-}
-
-// Logout User
-message LogoutRequest {
-
-}
-
-message LogoutResponse {
-    string message = 1;
-}
-
 // Get User Activity
 message GetUserActivityRequest {
     string id = 1;
@@ -165,12 +105,13 @@ message FollowUserResponse {
 
 // List Followers
 message ListFollowersRequest {
-    int32 page = 1;
-    int32 limit = 2;
+    string user_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 
 message ListFollowersResponse {
-    Follower followers = 1;
+    repeated Follower followers = 1;
     int32 total = 2;
     int32 page = 3;
     int32 limit = 4;
