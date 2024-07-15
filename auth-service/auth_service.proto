@@ -5,7 +5,7 @@ option go_package = "generated/user";
 package auth_service;
 
 service AuthService {
-    rpc UserInfo(UserInfoRequest) returns (UserInforResponse);
+    rpc UserInfo(UserInfoRequest) returns (UserInfoResponse);
     rpc GetUserProfile(GetProfileRequest) returns (GetProfileResponse);
     rpc UpdateUserProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
     rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
@@ -20,7 +20,7 @@ message UserInfoRequest {
     string id = 1;
 }
 
-message UserInforResponse {
+message UserInfoResponse {
     string id = 1;
     string username = 2;
     string full_name = 3;
