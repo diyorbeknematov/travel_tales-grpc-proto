@@ -132,7 +132,7 @@ message AddCommentResponse {
 message ListCommentsRequest {
     int32 page = 1;
     int32 limit = 2;
-    int32 offset = 3;
+    string story_id = 3;
 }
 
 message ListCommentsResponse {
