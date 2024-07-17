@@ -4,7 +4,7 @@ option go_package = "generated/communication";
 
 package user_communication;
 
-service MessageService {
+service CommunicationService {
     rpc SendMessageUser(SendMessageRequest) returns (SendMessageResponse);
     rpc ListMessage(ListMessageRequest) returns (ListMessageResponse);
     rpc AddTravelTips(AddTravelTipsRequest) returns (AddTravelTipsResponse);
