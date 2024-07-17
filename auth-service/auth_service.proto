@@ -10,7 +10,7 @@ service AuthService {
     rpc UpdateUserProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
     rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
     rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
-    rpc GetUserActivity(GetProfileRequest) returns (GetUserActivityResponse);
+    rpc GetUserActivity(GetUserActivityRequest) returns (GetUserActivityResponse);
     rpc FollowUser(FollowUserRequest) returns (FollowUserResponse);
     rpc ListFollowers(ListFollowersRequest) returns (ListFollowersResponse);
 }
