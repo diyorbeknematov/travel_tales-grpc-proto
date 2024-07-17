@@ -13,6 +13,9 @@ service TravelStoriesService {
     rpc AddCommment(AddCommentRequest) returns (AddCommentResponse);
     rpc ListComments(ListCommentsRequest) returns (ListCommentsResponse);
     rpc AddLike(AddLikeRequest) returns (AddLikeResponse);
+    rpc CountStories(CountStoriesRequest) returns (CountStoriesResponse);
+    rpc CountLikes(CountLikesRequest) returns (CountLikesResponse);
+    rpc CountComments(CountCommentsRequest) returns (CountCommentsResponse);
 }
 
 // CREATE TRAVEL STORY
@@ -159,4 +162,31 @@ message AddLikeResponse {
     string story_id = 1;
     string user_id = 2;
     string liked_at = 3;
+}
+
+//STORIES COUNT
+message CountStoriesRequest {
+    string user_id = 1;
+}
+
+message CountStoriesResponse {
+    int32 countStories = 1;
+}
+
+// LIKE COUNT
+message CountLikesRequest {
+    string user_id = 1;
+}
+
+message CountLikesResponse {
+    int32 countLikes = 1;
+}
+
+// CommentCount
+message CountCommentsRequest {
+    string user_id = 1;
+}
+
+message CountCommentsResponse {
+    int32 countComments = 1;
 }

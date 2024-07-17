@@ -16,7 +16,7 @@ message AddDestinationRequest {
     string country = 2;
     string description = 3;
     string best_time_to_visit = 4;
-    fixed64 average_cost_per_day = 5;
+    float average_cost_per_day = 5;
     string currency = 6;
     string language = 7;
 }
@@ -27,7 +27,7 @@ message AddDestionationResponse {
     string country = 3;
     string description = 4;
     string best_time_to_visit = 5;
-    fixed64 average_cost_per_day = 6;
+    float average_cost_per_day = 6;
     string currency = 7;
     string language = 8;
     string created_at = 9;
@@ -74,7 +74,9 @@ message GetDestinationResponse {
 }
 
 // GET TERENDING DESTINATIONS
-message GetTrendDestinationRequest {}
+message GetTrendDestinationRequest {
+    int32 limit = 1;
+}
 
 message GetTrendDestinationResponse {
     repeated TrendDestination destinations = 1;

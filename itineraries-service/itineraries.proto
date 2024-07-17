@@ -106,7 +106,7 @@ message GetItineraryResponse {
     string start_date = 4;
     string end_date = 5;
     Author author = 6;
-    Destination destinations = 7;
+    repeated Destination destinations = 7;
     int32 likes_count = 8;
     int32 comments_count = 9;
     string created_at = 10;
@@ -121,14 +121,15 @@ message Author {
 
 // COMMENT TO ITINERARY
 message LeaveCommentRequest {
-    string id = 1;
+    string author_id = 1;
     string content = 2;
+    string itinerary_id = 3;
 }
 
 message LeaveCommentResponse {
     string id = 1;
     string content = 2;
-    string athor_id = 3;
+    string author_id = 3;
     string itinerary_id = 4;
     string created_at = 5;
 }
